@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUCMS Semester Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .login-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .login-container h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .result-container {
+            display: none;
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        select {
+            padding: 10px;
+            width: 50%;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0627ff;
+        }
+        .no-results {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>UUCMS</h1>
+        <h2>Student Login</h2>
+        <input type="text" id="username" placeholder="Enter Username" required><br>
+        <input type="password" id="password" placeholder="Enter Password" required><br>
+        <button onclick="login()">Log In</button>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <div class="details-box">
+            <h3>Bengaluru City University</h3>
+            <p class="detail">Exam Month: <strong>UG/JUL24/II IV VI</strong></p>
+            <p class="detail">Exam Type: <strong>Regular Exam</strong></p>
+            <p class="detail">Program Level: <strong>UG</strong></p>
+            <p class="detail">Program Name: <strong>Bachelor of Commerce</strong></p>
+            <p class="detail">Student Reg No: <strong>U18CM22C0131</strong></p>
+            <p class="detail">Student Name: <strong>JANAVI R</strong></p>
+        </div>
+        <h2>Semester Results</h2>
+        <select id="semesterSelect" onchange="showResults()">
+            <option value="" disabled selected>Select Semester</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+        </select>
+        <div id="resultsTable"></div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "u18cm22c0131" && password === "password123") {
+                document.querySelector(".login-container").style.display = "none";
+                document.getElementById("resultContainer").style.display = "block";
+            } else {
+                alert("Invalid Username or Password. Please try again.");
+            }
+        }
+
+        function showResults() {
+            const semester = document.getElementById("semesterSelect").value;
+            const resultsTable = document.getElementById("resultsTable");
+
+            if (semester === "5" || semester === "6") {
+                resultsTable.innerHTML = `<div class="no-results">Result not yet published</div>`;
+                return;
+            }
+
+            let tableContent = "<table><tr><th>SN</th><th>Course Code</th><th>Course Name</th><th>Max Marks</th><th>Min Marks</th><th>SE Marks</th><th>IA Marks</th><th>Marks Secured</th><th>Credits</th><th>Grade</th><th>Status</th></tr>";
+
+            if (semester === "1") {
+                tableContent += `
+                    <tr><td>1</td><td>BC101</td><td>English</td><td>100</td><td>40</td><td>42</td><td>26</td><td>68</td><td>3</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>2</td><td>BC102</td><td>Financial Accounting</td><td>100</td><td>40</td><td>40</td><td>35</td><td>75</td><td>4</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>3</td><td>BC103</td><td>Business Mathematics</td><td>100</td><td>40</td><td>41</td><td>39</td><td>80</td><td>4</td><td>A</td><td>Pass</td></tr>
+                    <tr><td>4</td><td>BC104</td><td>Principles of Management</td><td>100</td><td>40</td><td>36</td><td>34</td><td>70</td><td>3</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>5</td><td>BC105</td><td>Economics</td><td>100</td><td>40</td><td>43</td><td>39</td><td>82</td><td>4</td><td>A</td><td>Pass</td></tr>
+                    <tr><td>6</td><td>BC106</td><td>Environmental Studies</td><td>50</td><td>20</td><td>22</td><td>20</td><td>42</td><td>2</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>7</td><td>BC107</td><td>Business Communication</td><td>100</td><td>40</td><td>44</td><td>30</td><td>74</td><td>3</td><td>A+</td><td>Pass</td></tr>
+                    <tr><td colspan="11">SGPA: 7.6 | CGPA: 7.6 | Result: Pass | Promotion Status: Eligible</td></tr>
+                `;
+            } else if (semester === "2") {
+                tableContent += `
+                    <tr><td>1</td><td>BC201</td><td>Corporate Accounting</td><td>100</td><td>40</td><td>39</td><td>35</td><td>74</td><td>4</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>2</td><td>BC202</td><td>Marketing Management</td><td>100</td><td>40</td><td>43</td><td>40</td><td>83</td><td>4</td><td>A</td><td>Pass</td></tr>
+                    <tr><td>3</td><td>BC203</td><td>Organizational Behaviour</td><td>100</td><td>40</td><td>37</td><td>35</td><td>72</td><td>4</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>4</td><td>BC204</td><td>Human Resource Management</td><td>100</td><td>40</td><td>44</td><td>40</td><td>84</td><td>3</td><td>A</td><td>Pass</td></tr>
+                    <tr><td>5</td><td>BC205</td><td>Business Research</td><td>100</td><td>40</td><td>40</td><td>39</td><td>79</td><td>3</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>6</td><td>BC206</td><td>Ethics in Business</td><td>100</td><td>40</td><td>33</td><td>39</td><td>72</td><td>3</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>7</td><td>BC207</td><td>Entrepreneurship</td><td>100</td><td>40</td><td>35</td><td>40</td><td>75</td><td>3</td><td>B</td><td>Pass</td></tr>
+                    <tr><td colspan="11">SGPA: 7.2 | CGPA: 7.4 | Result: Pass | Promotion Status: Eligible</td></tr>
+                `;
+            } else if (semester === "3") {
+                tableContent += `
+                    <tr><td>1</td><td>AECEN3.2</td><td>English</td><td>100</td><td>40</td><td>44</td><td>36</td><td>80</td><td>3</td><td>A</td><td>Pass</td></tr>
+                    <tr><td>2</td><td>AECKA3.3</td><td>Kannada</td><td>100</td><td>40</td><td>23</td><td>30</td><td>53</td><td>2</td><td>C</td><td>Pass</td></tr>
+                    <tr><td>3</td><td>DCBC301</td><td>Corporate Accounting</td><td>100</td><td>40</td><td>13</td><td>37</td><td>50</td><td>4</td><td>C</td><td>Pass</td></tr>
+                    <tr><td>4</td><td>DCBC302</td><td>Business Statistics</td><td>100</td><td>40</td><td>25</td><td>35</td><td>60</td><td>4</td><td>B</td><td>Pass</td></tr>
+                    <tr><td>5</td><td>DCBC303</td><td>Cost Accounting</td><td>100</td><td>40</td><td>44</td><td>30</td><td>84</td><td>4</td><td>A</td><td>Pass</td></tr>
+                    <tr><td>6</td><td>SENC332</td><td>NCC/NSS/R&R/S&G/Cultural</td><td>25</td><td>10</td><td>10</td><td>15</td><td>25</td><td>1</td><td>O</td><td>Pass</td></tr>
+                    <tr><td>7</td><td>SESP331</td><td>Sports</td><td>25</td><td>10</td><td>10</td><td>15</td><td>25</td><td>1</td><td>O</td><td>Pass</td></tr>
+                    <tr><td colspan="11">SGPA: 7.3 | CGPA: 7.3 | Result: Pass | Promotion Status: Eligible</td></tr>
+                `;
+            } else if (semester === "4") {
+                tableContent += `
+                    <tr><td>1</td><td>AECEN4.2</td><td>English</td><td>100</td><td>40</td><td>44</td><td>39</td><td>83</td><td>3</td><td>A+</td><td>Pass</td></tr>
+                    <tr><td>2</td><td>AECKA4.3</td><td>Kannada</td><td>100</td><td>40</td><td>33</td><td>36</td><td>69</td><td>3</td><td>B+</td><td>Pass</td></tr>
+                    <tr><td>3</td><td>DCBC401</td><td>Advanced Corporate Accounting</td><td>100</td><td>40</td><td>42</td><td>40</td><td>82</td><td>4</td><td>A+</td><td>Pass</td></tr>
+                    <tr><td>4</td><td>DCBC402</td><td>Costing Methods & Techniques</td><td>100</td><td>40</td><td>30</td><td>38</td><td>68</td><td>4</td><td>B+</td><td>Pass</td></tr>
+                    <tr><td>5</td><td>DCBC403</td><td>Business Regulatory Framework</td><td>100</td><td>40</td><td>52</td><td>38</td><td>90</td><td>4</td><td>A+</td><td>Pass</td></tr>
+                    <tr><td>6</td><td>SOCM401</td><td>Sociology of Tourism & Management</td><td>100</td><td>40</td><td>46</td><td>38</td><td>84</td><td>1<td>A+</td><td>Pass</td></tr>
+                    <tr><td>7</td><td>AINT402</td><td>Artificial Intelligence</td><td>50</td><td>20</td><td>16</td><td>19</td><td>35</td><td>2</td><td>B+</td><td>Pass</td></tr>
+                    <tr><td>8</td><td>SENC332</td><td>NCC/NSS/R&R/S&G/Cultural</td><td>25</td><td>10</td><td> </td><td>25</td><td>25</td><td>1</td><td>O</td><td>Pass</td></tr>
+                    <tr><td>9</td><td>SESP331</td><td>Sports</td><td>25</td><td>10</td><td> </td><td>24</td><td>24</td><td>1</td><td>O</td><td>Pass</td></tr>
+                    <tr><td colspan="11">SGPA: 8.1 | CGPA: - | Result: Pass | Promotion Status: Eligible</td></tr>
+
+                `;
+            }
+
+            tableContent += "</table>";
+            resultsTable.innerHTML = tableContent;
+        }
+    </script>
+</body>
+</html> 
